@@ -8,10 +8,6 @@ function Dashboard({ username }) {
     switch (activeTab) {
       case 'Dashboard':
         return <p>This is your dashboard. Here you can manage your student data and view reports.</p>;
-      case 'Student':
-        return <p>Student management content goes here.</p>;
-      case 'Year Level':
-        return <p>Year level management content goes here.</p>;
       case 'Course':
         return <p>Course management content goes here.</p>;
       default:
@@ -33,7 +29,7 @@ function Dashboard({ username }) {
    
       <nav className="dashboard-nav">
         <ul>
-          {['Dashboard', 'Student', 'Year Level', 'Course'].map((tab) => (
+          {['Dashboard', 'Course'].map((tab) => (
             <li
               key={tab}
               className={activeTab === tab ? 'active' : ''}
