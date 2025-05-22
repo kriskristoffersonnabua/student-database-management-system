@@ -17,6 +17,8 @@ const Table = ({ headers = [], rows = [] }) => {
                   <td key={data + "" + idx} className="has-text-dark">{data}</td>
                 )
               })}
+              <td className="has-text-dark"><button className="button is-warning has-text-white is-small">Edit</button></td>
+              <td className="has-text-dark"><button className="button is-danger has-text-white is-small">Delete</button></td>
             </tr>
           )
         })}

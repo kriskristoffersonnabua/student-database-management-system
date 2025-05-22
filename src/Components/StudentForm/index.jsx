@@ -1,18 +1,44 @@
 import { useState } from 'react';
+import { addStudent } from '../../database/helper-functions';
+
+const defaultStudentData = {
+  lastname: '',
+  firstname: '',
+  middlename: '',
+  birthday: new Date().toISOString(),
+  year_level: 1,
+  course: ''
+}
 
 function StudentForm(props) {
-  const [inputs, setInputs] = useState({});
+  const [inputs, setInputs] = useState({ ...defaultStudentData });
 
   const handleChange = (evt) => {
+    let value = evt?.target.value
+    if (evt?.target.name === 'birthday') {
+      value = new Date(evt?.target?.value).toISOString()
+    }
     setInputs({
       ...inputs,
-      [evt?.target.name]: evt?.target.value
+      [evt?.target.name]: value
     })
   }
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    alert(inputs);
+    try {
+      event.preventDefault();
+      console.log(inputs)
+      const response = addStudent({ ...inputs })
+      console.log(response)
+      if (response) {
+        props?.toggleForm()
+        props?.fetchStudents()
+        alert('Student was added.')
+      }
+    } catch (error) {
+      console.error(error)
+      alert('Something went wrong. Could not add student')
+    }
   }
 
   const handleCancel = () => {
@@ -23,7 +49,7 @@ function StudentForm(props) {
     <div style={{ width: '100vw', height: '100vh', background: '#ffffff70', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'fixed', left: '0px', top: '0px', zIndex: 5, }}>
       <form className="box container is-max-tablet p-8 has-background-light" onSubmit={handleSubmit} style={{ boxShadow: '2px 2px #ffffff70' }}>
         <label > Lastname:
-          <input class="input m-2 p-2 has-background-white"
+          <input class="input m-2 p-2 has-background-white has-text-black"
             type="text"
             name="lastname"
             value={inputs.lastname || ""}
@@ -31,7 +57,7 @@ function StudentForm(props) {
           />
         </label>
         <label>Firstname:
-          <input class="input m-2 p-2 has-background-white"
+          <input class="input m-2 p-2 has-background-white has-text-black"
             type="text"
             name="firstname"
             value={inputs.firstname || ""}
@@ -39,7 +65,7 @@ function StudentForm(props) {
           />
         </label>
         <label>Middlename:
-          <input class="input m-2 p-2 has-background-white"
+          <input class="input m-2 p-2 has-background-white has-text-black"
             type="text"
             name="middlename"
             value={inputs.middlename || ""}
@@ -47,7 +73,7 @@ function StudentForm(props) {
           />
         </label>
         <label>Birthday:
-          <input class="input m-2 p-2 has-background-white"
+          <input class="input m-2 p-2 has-background-white has-text-black"
             type="date"
             name="birthday"
             value={inputs.birthday || ""}
@@ -55,15 +81,15 @@ function StudentForm(props) {
           />
         </label>
         <label>Year Level:
-          <input class="input m-2 p-2 has-background-white"
+          <input class="input m-2 p-2 has-background-white has-text-black"
             type="text"
-            name="yearlevel"
-            value={inputs.yearlevel || ""}
+            name="year_level"
+            value={inputs.year_level || ""}
             onChange={handleChange}
           />
         </label>
         <label>Course:
-          <input class="input m-2 p-2 has-background-white"
+          <input class="input m-2 p-2 has-background-white has-text-black"
             type="text"
             name="course"
             value={inputs.course || ""}
@@ -71,7 +97,7 @@ function StudentForm(props) {
           />
         </label>
         <div class="field is-grouped is-grouped-centered p-3 m-4">
-          <p class="control ">
+          <p class="control">
             <button class="button is-primary">
               Add
             </button>
