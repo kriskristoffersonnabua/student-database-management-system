@@ -16,7 +16,8 @@ function Form() {
   }
 
   return (
-        <form className="container is-max-tablet m-5 p-3"onSubmit={handleSubmit}>
+    <div style={{ width: '100vw', height: '100vh', background: '#ffffff70', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'fixed', left: '0px', top: '0px', zIndex: 5, }}>
+      <form className="box container is-max-tablet p-8 has-background-light" onSubmit={handleSubmit} style={{ boxShadow: '2px 2px #ffffff70' }}>
         <label > Major:
         <input class="input m-2 p-2"
             type="text" 
@@ -48,13 +49,14 @@ function Form() {
         </button>
         </p>
         <p class="control ">
-            <a class="button is-light">
-            Cancel
-            </a>
+           <button class="button is-light" onClick={() => setInputs({})}>
+              Cancel
+            </button>
         </p>
         </div>
        
             </form>
+            </div>
   )
 }
 export default Form;
