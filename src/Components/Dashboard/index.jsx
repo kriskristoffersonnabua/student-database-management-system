@@ -80,14 +80,14 @@ function Dashboard({ username }) {
               </button>
             </div>
             <div style={{ display: 'flex', gap: '3rem' }}>
-              <div style={{ backgroundColor: '#f0f4f8', padding: '1.5rem 2rem', borderRadius: '8px', boxShadow: '0 2px 6px rgba(0,0,0,0.1)', minWidth: '180px', textAlign: 'center' }}>
-                <p style={{ fontSize: '1.2rem', color: '#555' }}>Total Students</p>
-                <p style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#3273dc' }}>{totalStudents}</p>
-              </div>
-              <div style={{ backgroundColor: '#f0f4f8', padding: '1.5rem 2rem', borderRadius: '8px', boxShadow: '0 2px 6px rgba(0,0,0,0.1)', minWidth: '180px', textAlign: 'center' }}>
-                <p style={{ fontSize: '1.2rem', color: '#555' }}>Total Courses</p>
-                <p style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#3273dc' }}>{totalCourses}</p>
-              </div>
+            <div style={{ backgroundColor: '#EAEFEF', padding: '1.5rem 2rem', borderRadius: '8px', boxShadow: '0 2px 6px rgba(51, 52, 70, 0.1)', minWidth: '180px', textAlign: 'center' }}>
+              <p style={{ fontSize: '1.2rem', color: '#333446' }}>Total Students</p>
+              <p style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#7F8CAA' }}>{totalStudents}</p>
+            </div>
+            <div style={{ backgroundColor: '#EAEFEF', padding: '1.5rem 2rem', borderRadius: '8px', boxShadow: '0 2px 6px rgba(51, 52, 70, 0.1)', minWidth: '180px', textAlign: 'center' }}>
+              <p style={{ fontSize: '1.2rem', color: '#333446' }}>Total Courses</p>
+              <p style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#7F8CAA' }}>{totalCourses}</p>
+            </div>
             </div>
             <div style={{ marginTop: '2rem' }}>
               <h3 className="title is-4">Students</h3>
@@ -102,7 +102,7 @@ function Dashboard({ username }) {
       case 'Students':
         return (
           <div>
-            <p className="mb-8 mt-4">This is your dashboard. Here you can manage your student data and view reports.</p>
+            <p className="mb-8 mt-4"> Here you can manage your student data and view reports.</p>
             <StudentsList />
           </div>
         );

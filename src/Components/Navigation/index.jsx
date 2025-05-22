@@ -21,21 +21,21 @@ const Navigation = (props) => {
   
 
   return (
-    <nav className="navbar m-1" role="navigation" aria-label="main navigation" style={{ background: '#fefefe', borderBottom: '2px solid rgb(196, 196, 196, 0.5)' }}>
+<nav className="navbar m-1" role="navigation" aria-label="main navigation" style={{ background: '#ffff', borderBottom: '2px solid' }}>
       <div className="navbar-brand is-flex is-align-item-flex-end">
-        <h1 className="login-title">
-          <span className="highlight">Student</span>Management
-        </h1>
+<h1 className="login-title" style={{ color: '#333446' }}>
+  <span className="highlight">Student</span>Management
+</h1>
       </div>
       <div id="navbarBasicExample" className="navbar-menu ml-8 is-block is-flex is-justify-content-center">
         <div className="navbar-start">
-          <span className="navbar-item">
+          <span className="navbar-item has-text-weight-semibold">
             Home
           </span>
-          <span className="navbar-item">
+          <span className="navbar-item has-text-weight-semibold">
             Students
           </span >
-            <span className="navbar-item">
+            <span className="navbar-item has-text-weight-semibold">
             Courses
           </span >
          {/* Removed logout button as per new requirement */}

@@ -69,8 +69,8 @@ function CourseForm(props) {
   ])
 
   return (
-    <div style={{ width: '100vw', height: '100vh', background: '#ffffff70', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'fixed', left: '0px', top: '0px', zIndex: 5, }}>
-      <form className="box container is-max-tablet p-8 has-background-light" onSubmit={handleSubmit} style={{ boxShadow: '2px 2px #ffffff70' }}>
+    <div style={{ width: '100vw', height: '100vh', background: 'rgba(50, 50, 93, 0.8)', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'fixed', left: 0, top: 0, zIndex: 1000 }}>
+      <form className="box container is-max-desktop p-6 has-background-white" onSubmit={handleSubmit} style={{ boxShadow: '0 4px 12px rgba(0,0,0,0.15)', borderRadius: '8px', width: '100%', maxWidth: '480px' }}>
         <label>Bachelors Degree:
           <div className="control">
             <div className="select is-fullwidth has-text-black">
@@ -84,7 +84,7 @@ function CourseForm(props) {
           </div>
         </label>
         <label >Course Name:
-          <input class="input is-fullwidth m-2 p-2 has-background-white has-text-black"
+          <input className="input is-fullwidth m-2 p-2 has-background-white has-text-black"
             type="text"
             name="course_name"
             value={inputs?.course_name || ""}
@@ -92,7 +92,7 @@ function CourseForm(props) {
           />
         </label>
         <label> Major:
-          <input class="input is-fullwidth m-2 p-2 has-background-white has-text-black"
+          <input className="input is-fullwidth m-2 p-2 has-background-white has-text-black"
             type="text"
             name="major"
             value={inputs?.major || ""}
@@ -100,7 +100,7 @@ function CourseForm(props) {
           />
         </label>
         <label>Minor:
-          <input class="input is-fullwidth m-2 p-2 has-background-white has-text-black"
+          <input className="input is-fullwidth m-2 p-2 has-background-white has-text-black"
             type="text"
             name="minor"
             value={inputs?.minor || ""}
@@ -108,26 +108,25 @@ function CourseForm(props) {
           />
         </label>
         <label>Course Detail:
-          <input class="input is-fullwidth m-2 p-2 has-background-white has-text-black"
+          <input className="input is-fullwidth m-2 p-2 has-background-white has-text-black"
             type="text"
             name="course_details"
             value={inputs?.course_details || ""}
             onChange={handleChange}
           />
         </label>
-        <div class="field is-grouped is-grouped-centered p-3 m-4">
-          <p class="control ">
-            <button class="button is-primary has-text-white">
+        <div className="field is-grouped is-grouped-centered p-3 m-4">
+          <p className="control ">
+            <button className="button is-primary has-text-white">
               {isUpdating ? 'Update Course' : 'Add Course'}
             </button>
           </p>
-          <p class="control ">
-            <button class="button is-light" onClick={() => props?.toggleForm()}>
+          <p className="control ">
+            <button className="button is-light" onClick={() => props?.toggleForm()}>
               Cancel
             </button>
           </p>
         </div>
-
       </form>
     </div>
   )

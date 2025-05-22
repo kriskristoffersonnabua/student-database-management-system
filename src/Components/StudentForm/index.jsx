@@ -83,10 +83,10 @@ function StudentForm(props) {
   // ])
 
   return (
-    <div style={{ width: '100vw', height: '100vh', background: '#ffffff70', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'fixed', left: '0px', top: '0px', zIndex: 5, }}>
-      <form className="box container is-max-tablet p-8 has-background-light" onSubmit={handleSubmit} style={{ boxShadow: '2px 2px #ffffff70' }}>
+    <div style={{ width: '100vw', height: '100vh', background: 'rgba(47, 51, 49, 0.8)', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'fixed', left: 0, top: 0, zIndex: 1000 }}>
+      <form className="box container is-max-desktop p-6 has-background-white" onSubmit={handleSubmit} style={{ boxShadow: '0 4px 12px rgba(0,0,0,0.15)', borderRadius: '8px', width: '100%', maxWidth: '480px' }}>
         <label > Lastname:
-          <input class="input m-2 p-2 has-background-white has-text-black"
+          <input className="input m-2 p-2 has-background-white has-text-black"
             type="text"
             name="lastname"
             value={inputs?.lastname || ""}
@@ -94,7 +94,7 @@ function StudentForm(props) {
           />
         </label>
         <label>Firstname:
-          <input class="input m-2 p-2 has-background-white has-text-black"
+          <input className="input m-2 p-2 has-background-white has-text-black"
             type="text"
             name="firstname"
             value={inputs?.firstname || ""}
@@ -102,7 +102,7 @@ function StudentForm(props) {
           />
         </label>
         <label>Middlename:
-          <input class="input m-2 p-2 has-background-white has-text-black"
+          <input className="input m-2 p-2 has-background-white has-text-black"
             type="text"
             name="middlename"
             value={inputs?.middlename || ""}
@@ -110,7 +110,7 @@ function StudentForm(props) {
           />
         </label>
         <label>Birthday:
-          <input class="input m-2 p-2 has-background-white has-text-black"
+          <input className="input m-2 p-2 has-background-white has-text-black"
             type="date"
             name="birthday"
             value={inputs?.birthday || ""}
@@ -118,7 +118,7 @@ function StudentForm(props) {
           />
         </label>
         <label>Year Level:
-          <input class="input m-2 p-2 has-background-white has-text-black"
+          <input className="input m-2 p-2 has-background-white has-text-black"
             type="text"
             name="year_level"
             value={inputs?.year_level || ""}
@@ -137,21 +137,20 @@ function StudentForm(props) {
             </div>
           </div>
         </label>
-        <div class="field is-grouped is-grouped-centered p-3 m-4">
-          <p class="control">
-            <button class="button is-primary has-text-white">
+        <div className="field is-grouped is-grouped-centered p-3 m-4">
+          <p className="control">
+            <button className="button is-primary has-text-white">
               {isUpdating ? 'Update' : 'Add'}
             </button>
           </p>
-          <p class="control ">
-            <button class="button is-light" onClick={handleCancel}>
+          <p className="control ">
+            <button className="button is-light" onClick={handleCancel}>
               Cancel
             </button>
           </p>
         </div>
       </form>
     </div>
-
   )
 }
 export default StudentForm
