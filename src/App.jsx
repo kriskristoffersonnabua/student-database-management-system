@@ -14,10 +14,10 @@ function App() {
 
   return (
     <>
-      {isLoggedIn ? (
-        <Dashboard username={username} />
-      ) : (
+      {!isLoggedIn ? (
         <Login onLoginSuccess={handleLoginSuccess} />
+      ) : (
+        <Dashboard username={username} />
       )}
     </>
   );
