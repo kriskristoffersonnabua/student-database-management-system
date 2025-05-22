@@ -8,7 +8,7 @@ function App() {
   const loggedInUser = useAtomValue(loggedInUserDetails)
   return (
     <>
-      {!true ? (
+      {!loggedInUser ? (
         <Login />
       ) : (
         <Dashboard />
