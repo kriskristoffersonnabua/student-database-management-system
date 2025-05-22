@@ -5,7 +5,9 @@ import { addCourse, updateCourse } from '../../database/helper-functions';
 const defaultCourseData = {
   major: '',
   minor: '',
-  course_details: ''
+  course_details: '',
+  course_name: '',
+  degree: null
 }
 
 function CourseForm(props) {
@@ -61,18 +63,18 @@ function CourseForm(props) {
       }
     }
   }
-   const [Degree] = useState(props?.degree || [{ id: 1, name: "Science" },
+
+  const [Degree] = useState(props?.degree || [{ id: 1, name: "Science" },
   { id: 2, name: "Arts" },
   ])
-  const [SelectedDegree] = useState(inputs?.degree || '')
 
   return (
     <div style={{ width: '100vw', height: '100vh', background: '#ffffff70', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'fixed', left: '0px', top: '0px', zIndex: 5, }}>
       <form className="box container is-max-tablet p-8 has-background-light" onSubmit={handleSubmit} style={{ boxShadow: '2px 2px #ffffff70' }}>
-       <label>Bachelors Degree:
+        <label>Bachelors Degree:
           <div className="control">
             <div className="select m-2 p-2 is-fullwidth has-text-black">
-              <select className="select has-background-white has-text-black" name="" value={inputs?.degree} onChange={handleChange}>
+              <select className="select has-background-white has-text-black" name="degree" value={inputs?.degree} onChange={handleChange}>
                 <option value="">Select a Degree</option>
                 {Degree.map((degree) => (
                   <option key={degree.id} value={degree.name}>{degree.name}</option>
@@ -81,11 +83,11 @@ function CourseForm(props) {
             </div>
           </div>
         </label>
-         <label>Course Name:
+        <label>Course Name:
           <input class="input m-2 p-2 has-background-white has-text-black"
             type="text"
-            name="course"
-            value={inputs.course || ""}
+            name="course_name"
+            value={inputs?.course_name || ""}
             onChange={handleChange}
           />
         </label>
@@ -93,7 +95,7 @@ function CourseForm(props) {
           <input class="input m-2 p-2 has-background-white has-text-black"
             type="text"
             name="major"
-            value={inputs.major || ""}
+            value={inputs?.major || ""}
             onChange={handleChange}
           />
         </label>
@@ -101,7 +103,7 @@ function CourseForm(props) {
           <input class="input m-2 p-2 has-background-white has-text-black"
             type="text"
             name="minor"
-            value={inputs.minor || ""}
+            value={inputs?.minor || ""}
             onChange={handleChange}
           />
         </label>
@@ -109,7 +111,7 @@ function CourseForm(props) {
           <input class="input m-2 p-2 has-background-white has-text-black"
             type="text"
             name="course_details"
-            value={inputs.course_details || ""}
+            value={inputs?.course_details || ""}
             onChange={handleChange}
           />
         </label>
