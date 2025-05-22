@@ -7,6 +7,8 @@ import { notification } from '../../helpers/notification'
 const StudentsList = () => {
   const [listOfStudents, setStudentList] = useState([])
   const [showForm, toggleStudentForm] = useState(false)
+  const [isEditing, toggleEditingMode] = useState(false)
+  const [studentCurrentlyEditing, setStudentBeingEditied] = useState(null)
 
   useEffect(() => {
     fetchStudents()
@@ -16,7 +18,8 @@ const StudentsList = () => {
 
   const fetchStudents = async () => {
     const students = await fetchAllStudents()
-    console.log(students, 'students')
+    toggleEditingMode(false)
+    setStudentBeingEditied(null)
     setStudentList(students)
   }
 
@@ -24,12 +27,8 @@ const StudentsList = () => {
   ]
 
   const formattedData = listOfStudents.map((student) => {
-    return [student?.id, student?.lastname, student?.firstname, student?.middlename, student?.birthday, student?.year_level, student?.course]
+    return [[student?.id, student?.lastname, student?.firstname, student?.middlename, student?.birthday, student?.year_level, student?.course], { ...student }]
   })
-
-  if (showForm) {
-    return <StudentForm toggleForm={toggleForm} fetchStudents={fetchStudents} />
-  }
 
   const delStudent = async (studentId) => {
     try {
@@ -44,10 +43,25 @@ const StudentsList = () => {
     }
   }
 
+  const openEditForm = (student) => {
+    console.log(student)
+    setStudentBeingEditied(student);
+    setTimeout(() => {
+      toggleEditingMode(true)
+      setTimeout(() => {
+        toggleForm()
+      }, 10)
+    }, 10)
+  }
+
+  if (showForm) {
+    return <StudentForm toggleForm={toggleForm} fetchStudents={fetchStudents} isEditing={isEditing} studentCurrentlyEditing={studentCurrentlyEditing} />
+  }
+
   return (
     <div>
       <button className="button is-primary mb-2 has-text-white is-small" onClick={toggleForm}>Add Student</button>
-      <Table headers={headers} rows={formattedData} deleteFunction={delStudent} />
+      <Table headers={headers} rows={formattedData} deleteFunction={delStudent} openUpdateForm={openEditForm} />
     </div>
   )
 }

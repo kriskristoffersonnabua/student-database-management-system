@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { addStudent } from '../../database/helper-functions';
+import { useState, useEffect } from 'react';
+import { addStudent, updateStudent } from '../../database/helper-functions';
 import { notification } from '../../helpers/notification'
 
 const defaultStudentData = {
@@ -13,6 +13,16 @@ const defaultStudentData = {
 
 function StudentForm(props) {
   const [inputs, setInputs] = useState({ ...defaultStudentData });
+  const [isUpdating, toggleIsUpdating] = useState(false)
+
+  console.log('inputs', setInputs)
+  useEffect(() => {
+    if (props?.isEditing) {
+      toggleIsUpdating(true)
+      console.log(isUpdating)
+      setInputs(props?.studentCurrentlyEditing)
+    }
+  }, [props?.isEditing, props?.studentCurrentlyEditing, isUpdating])
 
   const handleChange = (evt) => {
     let value = evt?.target.value
@@ -23,17 +33,37 @@ function StudentForm(props) {
   }
 
   const handleSubmit = (event) => {
-    try {
-      event.preventDefault();
-      const response = addStudent({ ...inputs })
-      if (response) {
-        props?.toggleForm()
+    if (!props?.isEditing) {
+      try {
+        event.preventDefault();
+        const response = addStudent({ ...inputs })
+        if (response) {
+          props?.toggleForm()
+          props?.fetchStudents()
+          notification.success("Student was added.")
+        }
+      } catch (error) {
+        console.error(error)
+        notification.error("Could not add student.")
         props?.fetchStudents()
-        notification.success("Student was added.")
       }
-    } catch (error) {
-      console.error(error)
-      notification.error("Could not add student.")
+    }
+    else {
+      try {
+        event.preventDefault();
+        const response = updateStudent({ ...inputs })
+        if (response) {
+          props?.toggleForm()
+          props?.fetchStudents()
+          setInputs(defaultStudentData)
+          notification.success("Student was updated.")
+        }
+      } catch (error) {
+        console.error(error)
+        setInputs(defaultStudentData)
+        notification.error("Could not update student.")
+        props?.fetchStudents()
+      }
     }
   }
 
@@ -48,7 +78,7 @@ function StudentForm(props) {
           <input class="input m-2 p-2 has-background-white has-text-black"
             type="text"
             name="lastname"
-            value={inputs.lastname || ""}
+            value={inputs?.lastname || ""}
             onChange={handleChange}
           />
         </label>
@@ -56,7 +86,7 @@ function StudentForm(props) {
           <input class="input m-2 p-2 has-background-white has-text-black"
             type="text"
             name="firstname"
-            value={inputs.firstname || ""}
+            value={inputs?.firstname || ""}
             onChange={handleChange}
           />
         </label>
@@ -64,7 +94,7 @@ function StudentForm(props) {
           <input class="input m-2 p-2 has-background-white has-text-black"
             type="text"
             name="middlename"
-            value={inputs.middlename || ""}
+            value={inputs?.middlename || ""}
             onChange={handleChange}
           />
         </label>
@@ -72,7 +102,7 @@ function StudentForm(props) {
           <input class="input m-2 p-2 has-background-white has-text-black"
             type="date"
             name="birthday"
-            value={inputs.birthday || ""}
+            value={inputs?.birthday || ""}
             onChange={handleChange}
           />
         </label>
@@ -80,7 +110,7 @@ function StudentForm(props) {
           <input class="input m-2 p-2 has-background-white has-text-black"
             type="text"
             name="year_level"
-            value={inputs.year_level || ""}
+            value={inputs?.year_level || ""}
             onChange={handleChange}
           />
         </label>
@@ -88,14 +118,14 @@ function StudentForm(props) {
           <input class="input m-2 p-2 has-background-white has-text-black"
             type="text"
             name="course"
-            value={inputs.course || ""}
+            value={inputs?.course || ""}
             onChange={handleChange}
           />
         </label>
         <div class="field is-grouped is-grouped-centered p-3 m-4">
           <p class="control">
-            <button class="button is-primary">
-              Add
+            <button class="button is-primary has-text-white">
+              {props?.isEditing ? 'Update' : 'Add'}
             </button>
           </p>
           <p class="control ">
@@ -104,7 +134,6 @@ function StudentForm(props) {
             </button>
           </p>
         </div>
-
       </form>
     </div>
 
