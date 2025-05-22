@@ -1,20 +1,40 @@
 import { useEffect, useState } from "react"
 import Table from "../Table"
 import StudentForm from '../StudentForm'
-import { deleteStudent, fetchAllStudents } from "../../database/helper-functions";
+import { deleteStudent, fetchAllCourses, fetchAllStudents } from "../../database/helper-functions";
 import { notification } from '../../helpers/notification'
+
+export const formatCourse = (course) => {
+  let courseString = '';
+  if (course?.degree) courseString += `Bachelor of ${course?.degree} `
+  if (course?.course_name) courseString += `${course?.course_name} `
+  if (course?.major) courseString += `(${course?.major}) `
+  if (course?.minor) courseString += `(${course?.minor}) `
+  return courseString
+}
 
 const StudentsList = () => {
   const [listOfStudents, setStudentList] = useState([])
+  const [courses, setCourses] = useState([])
   const [showForm, toggleStudentForm] = useState(false)
   const [isEditing, toggleEditingMode] = useState(false)
   const [studentCurrentlyEditing, setStudentBeingEditied] = useState(null)
 
   useEffect(() => {
-    fetchStudents()
+    (async () => {
+      await fetchCourses()
+      await fetchStudents()
+    })()
   }, [])
 
   const toggleForm = () => toggleStudentForm(!showForm)
+
+  const fetchCourses = async () => {
+    const courses = await fetchAllCourses()
+    const coursesObject = {}
+    courses.forEach((c) => Object.assign(coursesObject, { [c?.id]: { ...c } }))
+    setCourses(coursesObject)
+  }
 
   const fetchStudents = async () => {
     const students = await fetchAllStudents()
@@ -27,7 +47,7 @@ const StudentsList = () => {
   ]
 
   const formattedData = listOfStudents.map((student) => {
-    return [[student?.id, student?.lastname, student?.firstname, student?.middlename, student?.birthday, student?.year_level, student?.course], { ...student }]
+    return [[student?.id, student?.lastname, student?.firstname, student?.middlename, student?.birthday, student?.year_level, formatCourse(courses?.[student?.course])], { ...student }]
   })
 
   const delStudent = async (studentId) => {
@@ -54,7 +74,7 @@ const StudentsList = () => {
   }
 
   if (showForm) {
-    return <StudentForm toggleForm={toggleForm} fetchStudents={fetchStudents} isEditing={isEditing} studentCurrentlyEditing={studentCurrentlyEditing} />
+    return <StudentForm toggleForm={toggleForm} fetchStudents={fetchStudents} isEditing={isEditing} studentCurrentlyEditing={studentCurrentlyEditing} courses={courses} />
   }
 
   return (

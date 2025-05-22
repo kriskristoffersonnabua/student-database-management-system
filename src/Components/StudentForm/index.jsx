@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { addStudent, updateStudent } from '../../database/helper-functions';
 import { notification } from '../../helpers/notification'
+import { formatCourse } from '../StudentsList';
 
 const defaultStudentData = {
   lastname: '',
@@ -14,6 +15,11 @@ const defaultStudentData = {
 function StudentForm(props) {
   const [inputs, setInputs] = useState({ ...defaultStudentData });
   const [isUpdating, toggleIsUpdating] = useState(false)
+  const [courses, setCourses] = useState([])
+
+  useEffect(() => {
+    setCourses(Object.values(props?.courses))
+  }, [props?.courses])
 
   useEffect(() => {
     if (props?.isEditing) {
@@ -68,22 +74,13 @@ function StudentForm(props) {
   const handleCancel = () => {
     props?.toggleForm()
   }
-  const [courses] = useState(props?.courses || [{ id: 1, name: "Bachelor of Science in Information Technology" },
-  { id: 2, name: "Bachelor of Science in Civil Engineering" },
-  { id: 3, name: "Bachelor of Science in Nursing" },
-  { id: 4, name: "Bachelor of Science in Criminology" },
-  { id: 5, name: "Bachelor of Science in Business Administration" },
-  ])
-  const [selectedCourse] = useState(inputs?.course || '')
 
-  // const handleCourseChange = (event) => {
-  //   const selectedCourse = event.target.value;
-  //   setSelectedCourse(selectedCourse);
-  //   setInputs((prevInputs) => ({
-  //     ...prevInputs,
-  //     course: selectedCourse,
-  //   }));
-  // }
+  // const [courses] = useState(props?.courses || [{ id: 1, name: "Bachelor of Science in Information Technology" },
+  // { id: 2, name: "Bachelor of Science in Civil Engineering" },
+  // { id: 3, name: "Bachelor of Science in Nursing" },
+  // { id: 4, name: "Bachelor of Science in Criminology" },
+  // { id: 5, name: "Bachelor of Science in Business Administration" },
+  // ])
 
   return (
     <div style={{ width: '100vw', height: '100vh', background: '#ffffff70', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'fixed', left: '0px', top: '0px', zIndex: 5, }}>
@@ -134,7 +131,7 @@ function StudentForm(props) {
               <select className="select has-background-white has-text-black" name="course" value={inputs?.course} onChange={handleChange}>
                 <option value="">Select a course</option>
                 {courses.map((course) => (
-                  <option key={course.id} value={course.name}>{course.name}</option>
+                  <option key={course.id} value={course.id}>{formatCourse(course)}</option>
                 ))}
               </select>
             </div>

@@ -23,10 +23,10 @@ const CourseList = () => {
     setCourses(courses)
   }
 
-  const headers = ['ID', 'Major', 'Minor', 'Course Details', 'Actions']
+  const headers = ['ID', 'Degree', 'Course Name', 'Major', 'Minor', 'Course Details', 'Actions']
 
   const formattedData = courses.map((course) => {
-    return [[course?.id, course?.major, course?.minor, course?.course_details], { ...course }]
+    return [[course?.id, course?.degree, course?.course_name, course?.major, course?.minor, course?.course_details], { ...course }]
   })
 
   const delStudent = async (studentId) => {
