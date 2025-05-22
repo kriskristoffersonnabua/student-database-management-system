@@ -19,7 +19,7 @@ function Form() {
     <div style={{ width: '100vw', height: '100vh', background: '#ffffff70', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'fixed', left: '0px', top: '0px', zIndex: 5, }}>
       <form className="box container is-max-tablet p-8 has-background-light" onSubmit={handleSubmit} style={{ boxShadow: '2px 2px #ffffff70' }}>
         <label > Major:
-        <input class="input m-2 p-2"
+        <input class="input m-2 p-2 has-background-white"
             type="text" 
             name="major" 
             value={inputs.major || ""} 
@@ -27,7 +27,7 @@ function Form() {
         />
         </label>
         <label>Minor:
-            <input class="input m-2 p-2"
+            <input class="input m-2 p-2 has-background-white"
             type="text" 
             name="minor"
             value={inputs.minor || ""}
@@ -35,7 +35,7 @@ function Form() {
             />
         </label>
         <label>Course Detail:
-            <input class="input m-2 p-2"
+            <input class="input m-2 p-2 has-background-white"
             type="text" 
             name="coursedetail"
             value={inputs.coursedetail || ""}

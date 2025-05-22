@@ -40,6 +40,22 @@ function StudentForm(props) {
   const handleCancel = () => {
     props?.toggleForm()
   }
+  const [courses, setCourses] = useState(props?.courses || [{ id: 1, name: "Bachelor of Science in Information Technology" },
+    { id: 2, name: "Bachelor of Science in Civil Engineering" },
+    { id: 3, name: "Bachelor of Science in Nursing" },
+    { id: 4, name: "Bachelor of Science in Criminology" },
+    { id: 5, name: "Bachelor of Science in Business Administration" },
+  ])
+  const [selectedCourse, setSelectedCourse] = useState(inputs?.course || '')
+ 
+  const handleCourseChange = (event) => {
+    const selectedCourse = event.target.value;
+    setSelectedCourse(selectedCourse);
+    setInputs((prevInputs) => ({
+      ...prevInputs,
+      course: selectedCourse,
+    }));
+  }
 
   return (
     <div style={{ width: '100vw', height: '100vh', background: '#ffffff70', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'fixed', left: '0px', top: '0px', zIndex: 5, }}>
@@ -84,14 +100,17 @@ function StudentForm(props) {
             onChange={handleChange}
           />
         </label>
-        <label>Course:
-          <input class="input m-2 p-2 has-background-white has-text-black"
-            type="text"
-            name="course"
-            value={inputs.course || ""}
-            onChange={handleChange}
-          />
-        </label>
+        <label className="label">Course</label>
+      <div className="control">
+        <div className="select is-fullwidth">
+          <select name="course" value={selectedCourse} onChange={handleChange}>
+            <option value="">Select a course</option>
+            {courses.map((course) => (
+              <option key={course.id} value={course.name}>{course.name}</option>
+            ))}
+          </select>
+        </div>
+      </div>
         <div class="field is-grouped is-grouped-centered p-3 m-4">
           <p class="control">
             <button class="button is-primary">
@@ -110,4 +129,4 @@ function StudentForm(props) {
 
   )
 }
-export default StudentForm;
+export default StudentForm
