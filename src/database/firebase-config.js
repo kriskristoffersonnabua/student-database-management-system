@@ -3,12 +3,12 @@ import { getAuth } from 'firebase/auth';
 import { getFirestore } from "firebase/firestore";
 
 const firebaseApp = initializeApp({
-  apiKey: "AIzaSyBHrXflcOsPaGZnhF3E2o0gyO3z3nTObxM",
-  authDomain: "student-database-application.firebaseapp.com",
-  projectId: "student-database-application",
-  storageBucket: "student-database-application.firebasestorage.app",
-  messagingSenderId: "308470630006",
-  appId: "1:308470630006:web:476a2cb07e9206c5a1c157"
+  apiKey: "AIzaSyB3mRQbcnPdw_wUzIuVnK4c9yLWkFbhKn4",
+  authDomain: "sms-application-ae24c.firebaseapp.com",
+  projectId: "sms-application-ae24c",
+  storageBucket: "sms-application-ae24c.firebasestorage.app",
+  messagingSenderId: "862370209496",
+  appId: "1:862370209496:web:7e7fc899c583c0d0ac81ad"
 })
 
 export const auth = getAuth(firebaseApp);
