@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react"
 import Table from "../Table"
 import { db } from "../../database/firebase-config"
-import { collection, query, where, getDocs } from "firebase/firestore";
-
+import { collection, query, getDocs } from "firebase/firestore";
+import StudentForm from '../StudentForm'
 
 const StudentsList = () => {
   const [listOfStudents, setStudentList] = useState([])
+  const [showForm, toggleStudentForm] = useState(false)
+
   useEffect(() => {
     fetchStudents()
   }, [])
+
+  const toggleForm = () => toggleStudentForm(!showForm)
 
   const fetchStudents = async () => {
     console.log('called')
@@ -28,23 +32,19 @@ const StudentsList = () => {
 
   const headers = ['Lastname', 'Firstname', 'Middlename', 'Birthday', 'Year Level', 'Course'
   ]
-  const rows = [
-    {
-      lastname: 'Doe',
-      firstname: 'Jane',
-      middlename: 'Awesome',
-      birthday: '2025-05-22T03:17:24.614Z',
-      yearLevel: 2,
-      course: 'Computer Science'
-    }
-  ]
-  
+
   const formattedData = listOfStudents.map((student) => {
     return [student?.lastname, student?.firstname, student?.middlename, student?.birthday, student?.year_level, student?.course]
   })
 
+  console.log(showForm)
+  if (showForm) {
+    return <StudentForm toggleForm={toggleForm} />
+  }
+
   return (
     <div>
+      <button className="button is-primary mb-2" onClick={toggleForm}>Add Student</button>
       <Table headers={headers} rows={formattedData} />
     </div>
   )

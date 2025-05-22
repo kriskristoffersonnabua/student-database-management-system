@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Navigation from '../Navigation';
 import StudentsList from '../StudentsList';
-import Form from '../StudentForm';
 import CourseForm from '../CourseForm';
 
 
@@ -13,12 +12,12 @@ function Dashboard({ username }) {
       case 'Students':
         return (<div>
           <p className="mb-8 mt-4">This is your dashboard. Here you can manage your student data and view reports.</p>
-          <StudentsList /><Form />
+          <StudentsList />
         </div>)
       case 'Courses':
         return (<div>
           <p>Course management content goes here.</p>
-         < CourseForm /></div>
+          < CourseForm /></div>
         )
     }
   };

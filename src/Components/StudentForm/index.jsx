@@ -1,17 +1,13 @@
 import { useState } from 'react';
 
-function Form() {
+function StudentForm(props) {
   const [inputs, setInputs] = useState({});
 
-  const handleChange = (event) => {
-    const lastname = event.target.lastname;
-    const firstname = event.target.firstname;
-    const middlename = event.target.middlename;
-    const birthday = event.target.birthday;
-    const yearlevel = event.target.yearlevel;
-    const course = event.target.course;
-    setInputs(values => ({...values, [lastname]: value, [firstname]: value, [middlename]: value, [birthday]: value, [yearlevel]: value, [course
-    ]: value}))
+  const handleChange = (evt) => {
+    setInputs({
+      ...inputs,
+      [evt?.target.name]: evt?.target.value
+    })
   }
 
   const handleSubmit = (event) => {
@@ -19,70 +15,77 @@ function Form() {
     alert(inputs);
   }
 
+  const handleCancel = () => {
+    props?.toggleForm()
+  }
+
   return (
-        <form className="container is-max-tablet m-5 p-3" onSubmit={handleSubmit}>
+    <div style={{ width: '100vw', height: '100vh', background: '#ffffff70', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'fixed', left: '0px', top: '0px', zIndex: 5, }}>
+      <form className="box container is-max-tablet p-8 has-background-light" onSubmit={handleSubmit} style={{ boxShadow: '2px 2px #ffffff70' }}>
         <label > Lastname:
-        <input class="input m-2 p-2"
-            type="text" 
-            name="lastname" 
-            value={inputs.lastname || ""} 
+          <input class="input m-2 p-2 has-background-white"
+            type="text"
+            name="lastname"
+            value={inputs.lastname || ""}
             onChange={handleChange}
-        />
+          />
         </label>
         <label>Firstname:
-            <input class="input m-2 p-2"
-            type="text" 
+          <input class="input m-2 p-2 has-background-white"
+            type="text"
             name="firstname"
-            value={inputs.firstname || ""} 
+            value={inputs.firstname || ""}
             onChange={handleChange}
-            />
-            </label>
-            <label>Middlename:
-            <input class="input m-2 p-2"
-            type="text" 
-            name="middlename" 
-            value={inputs.middlename || ""} 
+          />
+        </label>
+        <label>Middlename:
+          <input class="input m-2 p-2 has-background-white"
+            type="text"
+            name="middlename"
+            value={inputs.middlename || ""}
             onChange={handleChange}
-            />
-            </label>
-            <label>Birthday:
-            <input class="input m-2 p-2"
-            type="date" 
-            name="birthday" 
-            value={inputs.birthday || ""} 
+          />
+        </label>
+        <label>Birthday:
+          <input class="input m-2 p-2 has-background-white"
+            type="date"
+            name="birthday"
+            value={inputs.birthday || ""}
             onChange={handleChange}
-            />
-            </label>
-            <label>Year Level:
-            <input class="input m-2 p-2"
-            type="text" 
-            name="yearlevel" 
-            value={inputs.yearlevel || ""} 
+          />
+        </label>
+        <label>Year Level:
+          <input class="input m-2 p-2 has-background-white"
+            type="text"
+            name="yearlevel"
+            value={inputs.yearlevel || ""}
             onChange={handleChange}
-            />
-            </label>
-            <label>Course:
-            <input  class="input m-2 p-2"
-            type="text" 
-            name="course" 
-            value={inputs.course || ""} 
+          />
+        </label>
+        <label>Course:
+          <input class="input m-2 p-2 has-background-white"
+            type="text"
+            name="course"
+            value={inputs.course || ""}
             onChange={handleChange}
-            />
-            </label>
+          />
+        </label>
         <div class="field is-grouped is-grouped-centered p-3 m-4">
-             <p class="control ">
+          <p class="control ">
             <button class="button is-primary">
-            Add
-        </button>
-        </p>
-        <p class="control ">
-            <a class="button is-light">
-            Cancel
-            </a>
-        </p>
+              Add
+            </button>
+          </p>
+          <p class="control ">
+            <button class="button is-light" onClick={handleCancel}>
+              Cancel
+            </button>
+          </p>
         </div>
-       
-            </form>
+
+      </form>
+    </div>
+
   )
 }
-export default Form;
+export default StudentForm;
