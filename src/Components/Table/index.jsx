@@ -12,9 +12,9 @@ const Table = ({ headers = [], rows = [] }) => {
         {rows.map((row) => {
           return (
             <tr>
-              {Object.entries(row).map((data) => {
+              {row.map((data, idx) => {
                 return (
-                  <td key={data?.[0]} className="has-text-dark">{data?.[1]}</td>
+                  <td key={data + "" + idx} className="has-text-dark">{data}</td>
                 )
               })}
             </tr>

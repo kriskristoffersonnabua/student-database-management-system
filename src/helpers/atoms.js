@@ -1,3 +1,4 @@
 import { atom } from 'jotai'
 
-export const studentDirtyData = atom({})
+export const loggedInUserDetails = atom(null)
+export const studentDirtyDataAtom = atom({})

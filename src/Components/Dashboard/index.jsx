@@ -9,7 +9,7 @@ function Dashboard({ username }) {
     switch (activeTab) {
       case 'Students':
         return (<div>
-          <p className="mb-8 mt-4">This is your dashboard. Here you can manage your student data and view reports.</p>
+          <p className="mb-8 mt-4">This is your dashboard. Here you can manage student data.</p>
           <StudentsList />
         </div>)
       case 'Courses':

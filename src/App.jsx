@@ -1,23 +1,17 @@
-import { useState } from 'react'
-import Login from './Components/login'
+import Login from './Components/Login'
 import Dashboard from './Components/Dashboard'
+import { useAtomValue } from 'jotai';
+import { loggedInUserDetails } from './helpers/atoms';
 
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [username, setUsername] = useState('');
-
-  const handleLoginSuccess = (username) => {
-    setIsLoggedIn(true);
-    setUsername(username);
-  };
-
+  const loggedInUser = useAtomValue(loggedInUserDetails)
   return (
     <>
-      {!isLoggedIn ? (
-        <Login onLoginSuccess={handleLoginSuccess} />
+      {!true ? (
+        <Login />
       ) : (
-        <Dashboard username={username} />
+        <Dashboard />
       )}
     </>
   );

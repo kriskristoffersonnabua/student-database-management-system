@@ -10,11 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "better-sqlite3": "^11.10.0",
     "bulma": "^1.0.4",
+    "firebase": "^11.8.1",
+    "jotai": "^2.12.4",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "sqlite3": "^5.1.7",
     "util": "^0.12.5"
   },
   "devDependencies": {

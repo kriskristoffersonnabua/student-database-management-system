@@ -1,16 +1,35 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import Table from "../Table"
+import { db } from "../../database/firebase-config"
+import { collection, query, where, getDocs } from "firebase/firestore";
+
 
 const StudentsList = () => {
-
+  const [listOfStudents, setStudentList] = useState([])
   useEffect(() => {
+    fetchStudents()
   }, [])
 
-  const headers = ['ID', 'Lastname', 'Firstname', 'Middlename', 'Birthday', 'Year Level', 'Course'
+  const fetchStudents = async () => {
+    console.log('called')
+    const q = query(collection(db, "students"));
+    const querySnapshot = await getDocs(q);
+    const students = []
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      students.push({
+        ...doc.data(),
+        id: doc.id
+      })
+    });
+    console.log(students, 'students')
+    setStudentList(students)
+  }
+
+  const headers = ['Lastname', 'Firstname', 'Middlename', 'Birthday', 'Year Level', 'Course'
   ]
   const rows = [
     {
-      id: 1,
       lastname: 'Doe',
       firstname: 'Jane',
       middlename: 'Awesome',
@@ -19,9 +38,14 @@ const StudentsList = () => {
       course: 'Computer Science'
     }
   ]
+  
+  const formattedData = listOfStudents.map((student) => {
+    return [student?.lastname, student?.firstname, student?.middlename, student?.birthday, student?.year_level, student?.course]
+  })
+
   return (
     <div>
-      <Table headers={headers} rows={rows}/>
+      <Table headers={headers} rows={formattedData} />
     </div>
   )
 }

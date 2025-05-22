@@ -6,7 +6,6 @@ const Navigation = (props) => {
   useEffect(() => {
     if (!hasRendered) {
       const navbarItems = document.querySelectorAll('.navbar-item')
-      console.log(navbarItems)
       navbarItems.forEach(el => {
         el.addEventListener('click', (e) => {
           e.stopPropagation()
