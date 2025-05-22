@@ -1,6 +1,9 @@
-const db = require('better-sqlite3')('studentdatabase.db');
+import betterSqlite3 from 'better-sqlite3'
+// const db = require('better-sqlite3')('studentdatabase.db');
+const db = betterSqlite3('studentdatabase.db')
 
-const createAdminTable = () => {
+
+export const createAdminTable = () => {
     const sql = `
         CREATE TABLE admin (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -11,7 +14,7 @@ const createAdminTable = () => {
     db.prepare(sql).run();
 }
 
-const createCourseTable = () => {
+export const createCourseTable = () => {
     const sql = `
         CREATE TABLE course (
             course_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -26,7 +29,7 @@ const createCourseTable = () => {
     db.prepare(sql).run();
 }
 
-const createStudentTable = () => {
+export const createStudentTable = () => {
     const sql = `
         CREATE TABLE student (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -45,7 +48,7 @@ const createStudentTable = () => {
     db.prepare(sql).run();
 }
 
-const insertStudent = (studentDetails) => {
+export const insertStudent = (studentDetails) => {
     const sql = `
         INSERT INTO student (lastname, firstname, middlename, birthday, year_level, course_id, created_at, updated_at)
         VALUES (?,?,?,?,?,?,?,?);
@@ -54,7 +57,7 @@ const insertStudent = (studentDetails) => {
     db.prepare(sql).run(lastname, firstname, middlename, birthday, year_level, course_id, created_at, updated_at)
 }
 
-const updateStudent = (id, detailsToUpdate) => {
+export const updateStudent = (id, detailsToUpdate) => {
     let detailsString = ''
     const list = Object.entries(detailsToUpdate)
     list.forEach((detail, idx) => {
@@ -68,13 +71,23 @@ const updateStudent = (id, detailsToUpdate) => {
     db.prepare(sql).run()
 }
 
-const insertCourse = ({
+export const insertCourse = ({
     major, minor, bachelor, course_details, created_at, updated_at
 }) => {
     db.prepare(`
             INSERT INTO course (major, minor, bachelor, course_details, created_at, updated_at)
             VALUES (?,?,?,?,?,?);
         `).run(major, minor, bachelor, course_details, created_at, updated_at)
+}
+
+export const fetchAllStudents = () => {
+  const sql = `
+    SELECT * FROM student INNER JOIN course
+    ON student.course_id = course.course_id
+  `
+  const rows = db.prepare(sql).run()
+  console.log(rows)
+  return rows;
 }
 
 // createCourseTable()

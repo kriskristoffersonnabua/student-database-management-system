@@ -43,6 +43,11 @@ WHERE id = 2;
 
 SELECT * FROM student;
 
+SELECT * FROM course;
+
+SELECT * FROM student INNER JOIN course
+ON student.course_id = course.course_id
+
 DROP TABLE admin;
 DROP TABLE student;
 DROP TABLE course;
