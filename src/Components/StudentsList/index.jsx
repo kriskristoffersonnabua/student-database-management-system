@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import Table from "../Table"
+import Table from "../StudentTable"
 import StudentForm from '../StudentForm'
 import { deleteStudent, fetchAllCourses, fetchAllStudents } from "../../database/helper-functions";
 import { notification } from '../../helpers/notification'

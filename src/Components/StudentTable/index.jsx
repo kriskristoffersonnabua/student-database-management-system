@@ -1,8 +1,8 @@
-const Table = ({ headers = [], rows = [], deleteFunction = () => { }, openUpdateForm = () => { } }) => {
+const Table = ({ headers = [], rows = [], deleteFunction = () => { }, openUpdateForm = () => { }, showActions = true }) => {
   const composeDeleteFunction = (id) => () => deleteFunction(id)
   const composeUpdateFunction = (student) => () => openUpdateForm(student)
   return (
-    <table class="table is-full-width p-2" style={{ width: '100%', boxShadow: '1px 1px rgba(55, 52, 52, 0.2)', background: '#FAFAFA' }}>
+    <table className="table is-full-width p-2" style={{ width: '100%', boxShadow: '1px 1px rgba(55, 52, 52, 0.2)', background: '#FAFAFA' }}>
       <thead>
         <tr>
           {headers.map((header) => (
@@ -21,10 +21,12 @@ const Table = ({ headers = [], rows = [], deleteFunction = () => { }, openUpdate
                   <td key={data + "" + idx} className="has-text-dark">{content}</td>
                 )
               })}
-              <td className="has-text-dark">
-                <button className="button is-warning has-text-white is-small mr-4" onClick={composeUpdateFunction(row?.[1])}>Edit</button>
-                <button className="button is-danger has-text-white is-small" onClick={composeDeleteFunction(row?.[0]?.[0])}>Delete</button>
-              </td>
+              {showActions && (
+                <td className="has-text-dark">
+                  <button className="button has-background-primary-dark has-text-white is-small mr-4" onClick={composeUpdateFunction(row?.[1])}>Edit</button>
+                  <button className="button is-danger has-text-white is-small" onClick={composeDeleteFunction(row?.[0]?.[0])}>Delete</button>
+                </td>
+              )}
             </tr>
           )
         })}

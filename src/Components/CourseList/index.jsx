@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
-import Table from "../Table"
+import Table from "../CourseTable"
 import CourseForm from '../CourseForm'
-import { deleteStudent, fetchAllCourses } from "../../database/helper-functions";
+import { fetchAllCourses } from "../../database/helper-functions";
 import { notification } from '../../helpers/notification'
 
 const CourseList = () => {
@@ -29,21 +29,21 @@ const CourseList = () => {
     return [[course?.id, course?.degree, course?.course_name, course?.major, course?.minor, course?.course_details], { ...course }]
   })
 
-  const delStudent = async (studentId) => {
+   const deleteCourse = async (courseId) => {
     try {
       notification.dismissAll()
-      notification.success('Deleting student..')
-      await deleteStudent(studentId)
+      notification.success('Deleting course..')
+      await deleteCourse(courseId)
       fetchCourses()
-      notification.success('Student deleted.')
+      notification.success('Course deleted.')
     } catch (error) {
       console.error(error)
-      notification.error('Could not delete student.')
+      notification.error('Could not delete course.')
     }
   }
 
-  const openEditForm = (student) => {
-    setCourseBeingEdited(student);
+  const openEditForm = (course) => {
+    setCourseBeingEdited(course);
     setTimeout(() => {
       toggleEditingMode(true)
       setTimeout(() => {
@@ -59,7 +59,7 @@ const CourseList = () => {
   return (
     <div>
       <button className="button is-primary mb-2 has-text-white is-small" onClick={toggleForm}>Add Course</button>
-      <Table headers={headers} rows={formattedData} deleteFunction={delStudent} openUpdateForm={openEditForm} />
+      <Table headers={headers} rows={formattedData} deleteFunction={deleteCourse} openUpdateForm={openEditForm} />
     </div>
   )
 }
