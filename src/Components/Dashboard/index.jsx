@@ -1,21 +1,25 @@
 import React, { useState } from 'react';
 import Navigation from '../Navigation';
 import StudentsList from '../StudentsList';
+import Form from '../StudentForm';
+import CourseForm from '../CourseForm';
+
 
 function Dashboard({ username }) {
-  const [activeTab, setActiveTab] = useState('Students');
+  const [activeTab, setActiveTab, setInputs] = useState('Students');
 
   const renderContent = () => {
     switch (activeTab) {
       case 'Students':
         return (<div>
-          <p className="mb-8 mt-4">This is your dashboard. Here you can manage student data.</p>
-          <StudentsList />
+          <p className="mb-8 mt-4">This is your dashboard. Here you can manage your student data and view reports.</p>
+          <StudentsList /><Form />
         </div>)
       case 'Courses':
-        return <p>Course management content goes here.</p>;
-      default:
-        return null;
+        return (<div>
+          <p>Course management content goes here.</p>
+         < CourseForm /></div>
+        )
     }
   };
 
@@ -25,6 +29,8 @@ function Dashboard({ username }) {
       {renderContent()}
     </div>
   )
+
 }
+
 
 export default Dashboard;
