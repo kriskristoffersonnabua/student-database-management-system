@@ -26,7 +26,7 @@
  }
 
  .login-title .highlight {
-   color: #009245;
+   color: #4E71FF;
  }
 
  label {
@@ -52,7 +52,7 @@
  input[type="password"]:focus {
    outline: none;
    border-color: transparent;
-   box-shadow: 0 0 0 2px #009245;
+   box-shadow: 0 0 0 2px #4E71FF;
  }
 
  button[type="submit"] {
@@ -69,7 +69,7 @@
  }
 
  button[type="submit"]:hover {
-   background-color: #007a36;
+   background-color: #4E71FF;
  }
 
  .footer-text {

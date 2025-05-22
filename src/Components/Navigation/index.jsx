@@ -23,7 +23,7 @@ const Navigation = (props) => {
   return (
 <nav className="navbar m-1" role="navigation" aria-label="main navigation" style={{ background: '#ffff', borderBottom: '2px solid' }}>
       <div className="navbar-brand is-flex is-align-item-flex-end">
-<h1 className="login-title" style={{ color: '#333446' }}>
+<h1 className="login-title" style={{ color: '#4E71FF' }}>
   <span className="highlight">Student</span>Management
 </h1>
       </div>
