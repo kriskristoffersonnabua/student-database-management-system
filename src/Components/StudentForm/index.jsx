@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { addStudent } from '../../database/helper-functions';
+import { notification } from '../../helpers/notification'
 
 const defaultStudentData = {
   lastname: '',
@@ -15,9 +16,6 @@ function StudentForm(props) {
 
   const handleChange = (evt) => {
     let value = evt?.target.value
-    if (evt?.target.name === 'birthday') {
-      value = new Date(evt?.target?.value).toISOString()
-    }
     setInputs({
       ...inputs,
       [evt?.target.name]: value
@@ -27,17 +25,15 @@ function StudentForm(props) {
   const handleSubmit = (event) => {
     try {
       event.preventDefault();
-      console.log(inputs)
       const response = addStudent({ ...inputs })
-      console.log(response)
       if (response) {
         props?.toggleForm()
         props?.fetchStudents()
-        alert('Student was added.')
+        notification.success("Student was added.")
       }
     } catch (error) {
       console.error(error)
-      alert('Something went wrong. Could not add student')
+      notification.error("Could not add student.")
     }
   }
 

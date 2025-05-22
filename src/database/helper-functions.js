@@ -1,4 +1,4 @@
-import { collection, query, getDocs, addDoc, doc } from "firebase/firestore";
+import { collection, query, getDocs, addDoc, doc, deleteDoc } from "firebase/firestore";
 import { db } from "./firebase-config"
 
 export const fetchAllStudents = async () => {
@@ -34,4 +34,8 @@ export const addStudent = async (student) => {
     ...student,
   })
   return docRef;
+}
+
+export const deleteStudent = async (studentId) => {
+  await deleteDoc(doc(db, "students", studentId))
 }
