@@ -44,7 +44,6 @@ const StudentsList = () => {
   }
 
   const openEditForm = (student) => {
-    console.log(student)
     setStudentBeingEditied(student);
     setTimeout(() => {
       toggleEditingMode(true)

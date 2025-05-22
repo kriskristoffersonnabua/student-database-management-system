@@ -15,14 +15,12 @@ function StudentForm(props) {
   const [inputs, setInputs] = useState({ ...defaultStudentData });
   const [isUpdating, toggleIsUpdating] = useState(false)
 
-  console.log('inputs', setInputs)
   useEffect(() => {
     if (props?.isEditing) {
       toggleIsUpdating(true)
-      console.log(isUpdating)
       setInputs(props?.studentCurrentlyEditing)
     }
-  }, [props?.isEditing, props?.studentCurrentlyEditing, isUpdating])
+  }, [props?.isEditing, props?.studentCurrentlyEditing])
 
   const handleChange = (evt) => {
     let value = evt?.target.value
@@ -70,22 +68,22 @@ function StudentForm(props) {
   const handleCancel = () => {
     props?.toggleForm()
   }
-  const [courses, setCourses] = useState(props?.courses || [{ id: 1, name: "Bachelor of Science in Information Technology" },
-    { id: 2, name: "Bachelor of Science in Civil Engineering" },
-    { id: 3, name: "Bachelor of Science in Nursing" },
-    { id: 4, name: "Bachelor of Science in Criminology" },
-    { id: 5, name: "Bachelor of Science in Business Administration" },
+  const [courses] = useState(props?.courses || [{ id: 1, name: "Bachelor of Science in Information Technology" },
+  { id: 2, name: "Bachelor of Science in Civil Engineering" },
+  { id: 3, name: "Bachelor of Science in Nursing" },
+  { id: 4, name: "Bachelor of Science in Criminology" },
+  { id: 5, name: "Bachelor of Science in Business Administration" },
   ])
-  const [selectedCourse, setSelectedCourse] = useState(inputs?.course || '')
- 
-  const handleCourseChange = (event) => {
-    const selectedCourse = event.target.value;
-    setSelectedCourse(selectedCourse);
-    setInputs((prevInputs) => ({
-      ...prevInputs,
-      course: selectedCourse,
-    }));
-  }
+  const [selectedCourse] = useState(inputs?.course || '')
+
+  // const handleCourseChange = (event) => {
+  //   const selectedCourse = event.target.value;
+  //   setSelectedCourse(selectedCourse);
+  //   setInputs((prevInputs) => ({
+  //     ...prevInputs,
+  //     course: selectedCourse,
+  //   }));
+  // }
 
   return (
     <div style={{ width: '100vw', height: '100vh', background: '#ffffff70', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'fixed', left: '0px', top: '0px', zIndex: 5, }}>
@@ -130,22 +128,22 @@ function StudentForm(props) {
             onChange={handleChange}
           />
         </label>
-        <label className="label">Course</label>
-      <div className="control">
-        <div className="select is-fullwidth">
-          <select name="course" value={selectedCourse} onChange={handleChange}>
-            <option value="">Select a course</option>
-            {courses.map((course) => (
-              <option key={course.id} value={course.name}>{course.name}</option>
-            ))}
-          </select>
-        </div>
-      </div>
-  
+        <label>Course:
+          <div className="control">
+            <div className="select is-fullwidth has-background-white has-text-black">
+              <select className="select has-background-white has-text-black" name="course" value={inputs?.course} onChange={handleChange}>
+                <option value="">Select a course</option>
+                {courses.map((course) => (
+                  <option key={course.id} value={course.name}>{course.name}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+        </label>
         <div class="field is-grouped is-grouped-centered p-3 m-4">
           <p class="control">
             <button class="button is-primary has-text-white">
-              {props?.isEditing ? 'Update' : 'Add'}
+              {isUpdating ? 'Update' : 'Add'}
             </button>
           </p>
           <p class="control ">

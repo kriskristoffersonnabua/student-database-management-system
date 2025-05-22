@@ -48,3 +48,23 @@ export const updateStudent = async (student) => {
 export const deleteStudent = async (studentId) => {
   await deleteDoc(doc(db, "students", studentId))
 }
+
+export const updateCourse = async (course) => {
+  const dirtydata = { ...course }
+  delete dirtydata?.id
+  const docRef = await setDoc(doc(db, "courses", course?.id), {
+    ...dirtydata
+  })
+  return docRef;
+}
+
+export const deleteCourse = async (courseId) => {
+  await deleteDoc(doc(db, "courses", courseId))
+}
+
+export const addCourse = async (course) => {
+  const docRef = await addDoc(collection(db, "courses"), {
+    ...course,
+  })
+  return docRef;
+}

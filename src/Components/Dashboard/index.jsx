@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Navigation from '../Navigation';
 import StudentsList from '../StudentsList';
 import CourseForm from '../CourseForm';
+import CourseList from '../CourseList';
 
 
 function Dashboard({ username }) {
@@ -16,9 +17,9 @@ function Dashboard({ username }) {
         </div>)
       case 'Courses':
         return (<div>
-          <p>Course management content goes here.</p>
-          < CourseForm /></div>
-        )
+          <p className="mb-8 mt-4">Course management content goes here.</p>
+          <CourseList />
+        </div>)
     }
   };
 
