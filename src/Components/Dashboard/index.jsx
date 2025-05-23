@@ -72,7 +72,7 @@ function Dashboard({ username }) {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <h2 className="title is-3" style={{ marginBottom: '1rem' }}>Dashboard Summary</h2>
               <button
-                className="button  has-text-white"
+                className="button"
                 style={{ padding: '0.5rem 1.5rem', borderRadius: '8px', boxShadow: '0 2px 6px rgba(36, 36, 39, 0.1)' }}
                 onClick={() => setLoggedInUser(null)}
               >

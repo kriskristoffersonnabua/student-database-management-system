@@ -24,7 +24,8 @@ const Navigation = (props) => {
 <nav className="navbar m-1" role="navigation" aria-label="main navigation" style={{ background: '#ffff', borderBottom: '2px solid' }}>
       <div className="navbar-brand is-flex is-align-item-flex-end">
 <h1 className="login-title" style={{ color: '#4E71FF' }}>
-  <span className="highlight">Student</span>Management
+  <span className="highlight">Student</span>
+  <span className="text has-text-black-bis">Management</span>
 </h1>
       </div>
       <div id="navbarBasicExample" className="navbar-menu ml-8 is-block is-flex is-justify-content-center">
