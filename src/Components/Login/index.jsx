@@ -32,7 +32,6 @@ function Login({ onLoginSuccess }) {
     try {
       const res = await signInWithEmailAndPassword(auth, loginData?.username, loginData?.password)
       setUserCredentials(res)
-      // Simulate login success
       alert(`Welcome back, ${loginData.username}!`);
       if (onLoginSuccess) {
         onLoginSuccess(loginData.username);

@@ -75,12 +75,6 @@ function StudentForm(props) {
     props?.toggleForm()
   }
 
-  // const [courses] = useState(props?.courses || [{ id: 1, name: "Bachelor of Science in Information Technology" },
-  // { id: 2, name: "Bachelor of Science in Civil Engineering" },
-  // { id: 3, name: "Bachelor of Science in Nursing" },
-  // { id: 4, name: "Bachelor of Science in Criminology" },
-  // { id: 5, name: "Bachelor of Science in Business Administration" },
-  // ])
 
   return (
     <div style={{ width: '100vw', height: '100vh', background: 'rgba(47, 51, 49, 0.8)', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'fixed', left: 0, top: 0, zIndex: 1000 }}>

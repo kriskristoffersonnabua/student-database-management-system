@@ -38,7 +38,6 @@ const Navigation = (props) => {
             <span className="navbar-item has-text-weight-semibold">
             Courses
           </span >
-         {/* Removed logout button as per new requirement */}
 
         </div>
       </div>
